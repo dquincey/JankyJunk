@@ -16,6 +16,44 @@ namespace Tetris{
         int x;
         int y;
     };
+    std::array<std::vector<std::array<position, 4>>, 6 > blockShapes{{
+        {
+            //i
+            {{ {0,0},{0,1},{0,2},{0,3} }},
+            {{ {0,0},{1,0},{2,0},{3,0} }},
+        },
+        {
+            //s
+            {{ {1,0},{2,0},{1,1},{0,1} }},
+            {{ {0,0},{0,1},{1,1},{1,2} }},
+        },
+        {
+            //z
+            {{ {0,0},{1,0},{1,1},{2,1} }},
+            {{ {1,0},{1,1},{0,1},{0,2} }},
+        },
+        {
+            //r
+            {{ {0,0},{0,1},{1,1},{2,1} }},
+            {{ {1,0},{2,0},{1,1},{1,2} }},
+            {{ {0,1},{1,1},{2,1},{2,2} }},
+            {{ {1,0},{1,1},{1,2},{0,2} }},
+        },
+        {
+            //l
+            {{ {1,0},{1,1},{1,2},{2,2} }},
+            {{ {0,1},{1,1},{0,2},{2,1} }},
+            {{ {0,0},{1,0},{1,1},{1,2} }},
+            {{ {0,1},{1,1},{1,2},{0,2} }},
+        },
+        {
+            //t
+            {{ {0,1},{1,1},{1,2},{2,1} }},
+            {{ {0,1},{1,1},{1,0},{1,2} }},
+            {{ {1,0},{1,1},{0,1},{2,1} }},
+            {{ {1,0},{1,1},{2,1},{1,2} }},
+        }
+    }};
     enum directions{
         up,
         down,
@@ -42,15 +80,15 @@ namespace Tetris{
             default:
                 proposedPos = {pos.x, pos.y};
         }
-        if (proposedPos.x < 10 && proposedPos.x >= 0 && proposedPos.y < 20 && proposedPos.y >= 0 && tetrisGrid[proposedPos.y][proposedPos.x] != 2){
+        if (proposedPos.x < 10 && proposedPos.x >= 0 && proposedPos.y < 20 && proposedPos.y >= 0 && tetrisGrid[proposedPos.y][proposedPos.x] != frozen){
             return true;
         }
         else {
             std::cout << "wasn't allowed" <<std::endl;
             return false;
         }
-
     }
+
     void draw_blocks(){
         ClearBackground(BLACK);
         for (int y = 0; y < static_cast<int>(tetrisGrid.size()); y++){
@@ -85,12 +123,10 @@ namespace Tetris{
         }
     }
     void clear_all_moving(){
-        int clearCounter = 0;
-        for (int y = 0; y < static_cast<int>(tetrisGrid.size()); y++){
-            for (int x = 0; x < static_cast<int>(tetrisGrid[y].size()); x++){
-                if (tetrisGrid[y][x] == 1){
-                    set(x,y,0);
-                    clearCounter++;
+        for(std::array<int, GRID_WIDTH>& y : tetrisGrid){
+            for (int& x : y){
+                if (x == 1){
+                    x = 0;
                 }
             }
         }
@@ -102,6 +138,11 @@ class Tetromino{
         Tetris::position pos = {0,0};
         int currentRotation = 0;
 
+        void update_block_positions(int index){
+            if (index >= 0 && index < 6){
+                blockPositions = Tetris::blockShapes[index];
+            }
+        }
         void applyPositions(){
             Tetris::clear_all_moving();
             for (Tetris::position i : blockPositions[currentRotation]){
@@ -172,8 +213,8 @@ int main()
             x = 0;
         }
     }
-    Tetris::set(9, 10, 1);
-    iBlock block;
+    Tetromino block;
+    block.update_block_positions(3);
     block.applyPositions();
     while (!WindowShouldClose())
     {
