@@ -2,6 +2,7 @@
 #include <array>
 #include <iostream>
 #include <vector>
+#include <chrono>
 const int GRID_WIDTH= 10;
 const int GRID_HEIGHT = 20;
 const int OFFSET_X = 16;
@@ -16,11 +17,18 @@ namespace Tetris{
         int x;
         int y;
     };
-    std::array<std::vector<std::array<position, 4>>, 6 > blockShapes{{
+    std::array<std::vector<std::array<position, 4>>, 7 > blockShapes{{
         {
             //i
-            {{ {0,0},{0,1},{0,2},{0,3} }},
             {{ {0,0},{1,0},{2,0},{3,0} }},
+            {{ {1,-1},{1,0},{1,1},{1,2} }},
+        },
+        {
+            //t
+            {{ {0,1},{1,1},{1,2},{2,1} }},
+            {{ {0,1},{1,1},{1,0},{1,2} }},
+            {{ {1,0},{1,1},{0,1},{2,1} }},
+            {{ {1,0},{1,1},{2,1},{1,2} }},
         },
         {
             //s
@@ -44,15 +52,12 @@ namespace Tetris{
             {{ {1,0},{1,1},{1,2},{2,2} }},
             {{ {0,1},{1,1},{0,2},{2,1} }},
             {{ {0,0},{1,0},{1,1},{1,2} }},
-            {{ {0,1},{1,1},{1,2},{0,2} }},
+            {{ {0,1},{1,1},{2,1},{0,2} }},
         },
         {
-            //t
-            {{ {0,1},{1,1},{1,2},{2,1} }},
-            {{ {0,1},{1,1},{1,0},{1,2} }},
-            {{ {1,0},{1,1},{0,1},{2,1} }},
-            {{ {1,0},{1,1},{2,1},{1,2} }},
-        }
+            //o
+            {{ {0,0},{1,0},{1,1},{0,1} }},
+        },
     }};
     enum directions{
         up,
@@ -84,7 +89,6 @@ namespace Tetris{
             return true;
         }
         else {
-            std::cout << "wasn't allowed" <<std::endl;
             return false;
         }
     }
@@ -125,8 +129,17 @@ namespace Tetris{
     void clear_all_moving(){
         for(std::array<int, GRID_WIDTH>& y : tetrisGrid){
             for (int& x : y){
-                if (x == 1){
-                    x = 0;
+                if (x == moving){
+                    x = empty;
+                }
+            }
+        }
+    }
+    void freeze_all_moving(){
+        for(std::array<int, GRID_WIDTH>& y : tetrisGrid){
+            for (int& x : y){
+                if (x == moving){
+                    x = frozen;
                 }
             }
         }
@@ -139,7 +152,7 @@ class Tetromino{
         int currentRotation = 0;
 
         void update_block_positions(int index){
-            if (index >= 0 && index < 6){
+            if (index >= 0 && index < 7){
                 blockPositions = Tetris::blockShapes[index];
             }
         }
@@ -158,6 +171,17 @@ class Tetromino{
             }
             return correct;
         }
+        Tetromino()
+        {
+            restart();
+        }
+        void restart(){
+            currentRotation = 0;
+            pos = {5,0};
+            int rand = GetRandomValue(0, 6);
+            update_block_positions(rand);
+            std::cout << rand <<std::endl;
+        }
         void move (Tetris::directions direction){
             Tetris::position oldPos = pos;
             for (Tetris::position i : blockPositions[currentRotation]){
@@ -165,17 +189,25 @@ class Tetromino{
             switch (direction){
                 case Tetris::up:
                     pos.y -= 1;
+                    break;
                 case Tetris::down:
                     pos.y += 1;
+                    break;
                 case Tetris::left:
                     pos.x -= 1;
+                    break;
                 case Tetris::right:
                     pos.x += 1;
+                    break;
                 default:
                     break;
             }
             if(positionsCorrect() == true){
                 applyPositions();
+            }
+            else if(direction == Tetris::down){
+                Tetris::freeze_all_moving();
+                restart();
             }
             else{
                 pos = oldPos;
@@ -194,39 +226,36 @@ class Tetromino{
             }
         }
 };
-class iBlock : public Tetromino{
-    public:
-        iBlock(){
-            blockPositions = {
-                {{ {0,0},{0,1},{0,2},{0,3} }},
-                {{ {0,0},{1,0},{2,0},{3,0} }},
-            };
-        }
-};
-
 int main()
 {
     InitWindow(BLOCK_SPACING * GRID_WIDTH + OFFSET_Y * 2, BLOCK_SPACING * GRID_HEIGHT + OFFSET_Y*2, "My window");
     SetTargetFPS(60);
-    for(std::array y : tetrisGrid){
-        for (int x : y){
-            x = 0;
-        }
-    }
+    auto oldTime  = std::chrono::steady_clock::now();
+    auto timePerDrop = std::chrono::milliseconds(500);
     Tetromino block;
-    block.update_block_positions(3);
-    block.applyPositions();
     while (!WindowShouldClose())
     {
         BeginDrawing();
         Tetris::draw_blocks();
-        if(IsKeyPressed(KEY_SPACE)){
+        if(IsKeyPressed(KEY_DOWN)){
             block.move(Tetris::down);
+        }
+        if(IsKeyPressed(KEY_LEFT)){
+            block.move(Tetris::left);
+        }
+        if(IsKeyPressed(KEY_RIGHT)){
+            block.move(Tetris::right);
         }
         if(IsKeyPressed(KEY_UP)){
             block.rotate();
         }
+
+        if (std::chrono::steady_clock::now() -oldTime  >= timePerDrop){
+            block.move(Tetris::down);
+            oldTime = std::chrono::steady_clock::now();
+        }
         EndDrawing();
+
     }
 
     CloseWindow();
