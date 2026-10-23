@@ -1,0 +1,6 @@
+*This is where I'm gonna dump all of my projects!*
+
+So far it's gonna be just random stuff like tetris or snake, but they'll get more complex as I learn more about programming! I'm basically a beginner and am still learning, so don't be annoyed that they aren't very impressive :/
+
+So far, I've worked on a recreation of tetris, it's way worse than actual tetris because it doesn't have the same rotation system, colours, and the scoring system might be a bit different. But It works! so far bug free :). It was made using raylib and C++, just because I'm learning 
+the language and wanted to get more familiar with it, with more /doing/ and less learning. If you want to try it, just download the executable *tetris* and run it using =./tetris= in the terminal
