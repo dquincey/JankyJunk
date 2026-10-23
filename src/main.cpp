@@ -326,6 +326,9 @@ int main()
         if(IsKeyPressed(KEY_SPACE)){
             block.instantFall();
         }
+        if (WindowShouldClose()){
+            break;
+        }
 
         if (std::chrono::steady_clock::now() -oldTime  >= timePerDrop){
             block.move(Tetris::down);
