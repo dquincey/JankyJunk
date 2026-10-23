@@ -11,7 +11,27 @@ const int BLOCK_SPACING = 16;
 const int BLOCK_WIDTH = 16;
 const int BLOCK_HEIGHT= 16;
 std::array<std::array<int, GRID_WIDTH>,GRID_HEIGHT> tetrisGrid;
+bool gameIsOver = false;
+float score = 0;
+float level = 0;
+auto timePerDrop = std::chrono::milliseconds(500);
+void applyScore(int inARow){
+    switch (inARow) {
+        case 1:
+            score += 40 * (level+1);
+            break;
+        case 2:
+            score += 100* (level+1);
+            break;
+        case 3:
+            score += 300* (level+1);
+            break;
+        case 4:
+            score += 1200* (level+1);
+            break;
 
+    }
+}
 namespace Tetris{
     struct position{
         int x;
@@ -52,7 +72,7 @@ namespace Tetris{
             {{ {1,0},{1,1},{1,2},{2,2} }},
             {{ {0,1},{1,1},{0,2},{2,1} }},
             {{ {0,0},{1,0},{1,1},{1,2} }},
-            {{ {0,1},{1,1},{2,1},{0,2} }},
+            {{ {0,1},{1,1},{2,1},{2,0} }},
         },
         {
             //o
@@ -111,20 +131,11 @@ namespace Tetris{
             std::cout << "Out of bounds" << std::endl;
         }
     }
-    void move(int x, int y, directions direction){
-        set(x,y,0);
-        switch (direction){
-            case up:
-                set(x, y - 1, 1);
-            case down:
-                set(x, y + 1, 1);
-            case left:
-                set(x -1 ,y , 1);
-            case right:
-                set(x + 1, y, 1);
-            default:
-                break;
+    void moveDown(int x, int y){
+        if (tetrisGrid[y][x] == frozen){
+            set(x, y + 1, frozen);
         }
+        set(x,y,empty);
     }
     void clear_all_moving(){
         for(std::array<int, GRID_WIDTH>& y : tetrisGrid){
@@ -144,9 +155,51 @@ namespace Tetris{
             }
         }
     }
+    void clearLine(int y){
+        level += 0.1;// change level for score
+        timePerDrop = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::duration<double>(timePerDrop) * 0.99);
+        if (y >= 0 && y < GRID_HEIGHT){
+            for (int& i : tetrisGrid[y]){
+                i = empty;
+            }
+        }
+    }
+    void moveLinesDown(int start){
+        if (start >= 0 && start < GRID_HEIGHT){
+            for (int y = start; y >= 0; y--){
+                for (int x = 0; x < GRID_WIDTH; x++){
+                    moveDown(x, y);
+                }
+            }
+        }
+    }
+    void checkFullLines(){
+        int inARow = 0; // See how many in a row you got
+        for (int y = GRID_HEIGHT - 1; y >= 0; y-- ){
+            bool allFrozen = true;
+            for (int x : tetrisGrid[y]){
+                if (x != frozen){
+                    allFrozen = false;
+                    break;
+                }
+            }
+            if (allFrozen == true){
+                clearLine(y);
+                moveLinesDown(y - 1);
+                y = GRID_HEIGHT;
+                inARow++;
+                applyScore(inARow);
+            }
+            else{
+                inARow = 0;
+            }
+
+        }
+    }
 }
 class Tetromino{
     public:
+        bool justSpawned = true;
         std::vector<std::array<Tetris::position, 4>> blockPositions;
         Tetris::position pos = {0,0};
         int currentRotation = 0;
@@ -171,16 +224,24 @@ class Tetromino{
             }
             return correct;
         }
-        Tetromino()
-        {
-            restart();
-        }
         void restart(){
+            Tetris::checkFullLines();
             currentRotation = 0;
             pos = {5,0};
             int rand = GetRandomValue(0, 6);
             update_block_positions(rand);
-            std::cout << rand <<std::endl;
+            if (positionsCorrect() == false){
+                //You died
+                std::cout<<"Game Over!\n";
+                gameIsOver = true;
+            }
+            else {
+                applyPositions();
+            }
+        }
+        Tetromino()
+        {
+            restart();
         }
         void move (Tetris::directions direction){
             Tetris::position oldPos = pos;
@@ -191,6 +252,7 @@ class Tetromino{
                     pos.y -= 1;
                     break;
                 case Tetris::down:
+                    justSpawned = false;
                     pos.y += 1;
                     break;
                 case Tetris::left:
@@ -202,6 +264,7 @@ class Tetromino{
                 default:
                     break;
             }
+
             if(positionsCorrect() == true){
                 applyPositions();
             }
@@ -225,15 +288,26 @@ class Tetromino{
                 currentRotation = oldRot;
             }
         }
+        void instantFall(){
+            Tetris::position oldPos = pos;
+            while(positionsCorrect() == true){
+                oldPos = pos;
+                pos.y += 1;
+            }
+            pos = oldPos;
+            applyPositions();
+            Tetris::freeze_all_moving();
+            restart();
+        }
 };
 int main()
 {
+    SetTraceLogLevel(LOG_NONE); // Tell raylib to stfu
     InitWindow(BLOCK_SPACING * GRID_WIDTH + OFFSET_Y * 2, BLOCK_SPACING * GRID_HEIGHT + OFFSET_Y*2, "My window");
     SetTargetFPS(60);
     auto oldTime  = std::chrono::steady_clock::now();
-    auto timePerDrop = std::chrono::milliseconds(500);
     Tetromino block;
-    while (!WindowShouldClose())
+    while (!gameIsOver)
     {
         BeginDrawing();
         Tetris::draw_blocks();
@@ -249,6 +323,9 @@ int main()
         if(IsKeyPressed(KEY_UP)){
             block.rotate();
         }
+        if(IsKeyPressed(KEY_SPACE)){
+            block.instantFall();
+        }
 
         if (std::chrono::steady_clock::now() -oldTime  >= timePerDrop){
             block.move(Tetris::down);
@@ -258,6 +335,7 @@ int main()
 
     }
 
+    std::cout<<"Score: " << score << std::endl;
     CloseWindow();
 
     return 0;
