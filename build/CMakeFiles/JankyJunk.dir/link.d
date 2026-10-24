@@ -3,7 +3,7 @@ JankyJunk: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   CMakeFiles/JankyJunk.dir/src/main.cpp.o \
-  /usr/lib/libraylib.so.6.0.0 \
+  /usr/lib/libraylib.so.6.2.0 \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -52,7 +52,7 @@ JankyJunk: \
 
 CMakeFiles/JankyJunk.dir/src/main.cpp.o:
 
-/usr/lib/libraylib.so.6.0.0:
+/usr/lib/libraylib.so.6.2.0:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 

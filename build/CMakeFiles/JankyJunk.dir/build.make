@@ -96,7 +96,7 @@ JankyJunk_EXTERNAL_OBJECTS =
 JankyJunk: CMakeFiles/JankyJunk.dir/src/main.cpp.o
 JankyJunk: CMakeFiles/JankyJunk.dir/build.make
 JankyJunk: CMakeFiles/JankyJunk.dir/compiler_depend.ts
-JankyJunk: /usr/lib/libraylib.so.6.0.0
+JankyJunk: /usr/lib/libraylib.so.6.2.0
 JankyJunk: CMakeFiles/JankyJunk.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/dtonmai/JankyJunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable JankyJunk"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/JankyJunk.dir/link.txt --verbose=$(VERBOSE)
