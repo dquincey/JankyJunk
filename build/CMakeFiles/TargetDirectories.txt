@@ -1,3 +1,0 @@
-/home/dtonmai/JankyJunk/build/CMakeFiles/JankyJunk.dir
-/home/dtonmai/JankyJunk/build/CMakeFiles/edit_cache.dir
-/home/dtonmai/JankyJunk/build/CMakeFiles/rebuild_cache.dir
