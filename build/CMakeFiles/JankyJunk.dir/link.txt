@@ -1,0 +1,1 @@
+/usr/sbin/c++ -g -Wl,--dependency-file=CMakeFiles/JankyJunk.dir/link.d CMakeFiles/JankyJunk.dir/src/main.cpp.o -o JankyJunk  /usr/lib/libraylib.so.6.2.0 -lm

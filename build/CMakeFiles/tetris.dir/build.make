@@ -96,12 +96,7 @@ tetris_EXTERNAL_OBJECTS =
 tetris: CMakeFiles/tetris.dir/src/tetris.cpp.o
 tetris: CMakeFiles/tetris.dir/build.make
 tetris: CMakeFiles/tetris.dir/compiler_depend.ts
-tetris: _deps/raylib-build/raylib/libraylib.a
-tetris: /usr/lib/libOpenGL.so
-tetris: /usr/lib/libGLX.so
-tetris: /usr/lib/libGLU.so
-tetris: /usr/lib/librt.a
-tetris: /usr/lib/libm.so
+tetris: /usr/lib/libraylib.so.6.2.0
 tetris: CMakeFiles/tetris.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/dtonmai/JankyJunk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable tetris"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tetris.dir/link.txt --verbose=$(VERBOSE)

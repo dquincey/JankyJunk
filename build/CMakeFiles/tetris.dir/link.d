@@ -3,18 +3,7 @@ tetris: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   CMakeFiles/tetris.dir/src/tetris.cpp.o \
-  _deps/raylib-build/raylib/libraylib.a \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libpthread.a \
-  /usr/lib/libOpenGL.so \
-  /usr/lib/libGLX.so \
-  /usr/lib/libGLU.so \
-  /usr/lib/librt.a \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
-  /usr/lib/libm.so.6 \
-  /usr/lib/libmvec.so.1 \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libdl.a \
+  /usr/lib/libraylib.so.6.2.0 \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so \
@@ -45,8 +34,6 @@ tetris: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o \
-  /usr/lib32/libGLdispatch.so.0 \
-  /usr/lib/libGLdispatch.so.0 \
   /usr/lib32/libX11.so.6 \
   /usr/lib/libX11.so.6 \
   /usr/lib/ld-linux-x86-64.so.2 \
@@ -65,29 +52,7 @@ tetris: \
 
 CMakeFiles/tetris.dir/src/tetris.cpp.o:
 
-_deps/raylib-build/raylib/libraylib.a:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libpthread.a:
-
-/usr/lib/libOpenGL.so:
-
-/usr/lib/libGLX.so:
-
-/usr/lib/libGLU.so:
-
-/usr/lib/librt.a:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libm.so:
-
-/usr/lib/libm.so.6:
-
-/usr/lib/libmvec.so.1:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libdl.a:
+/usr/lib/libraylib.so.6.2.0:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 
@@ -148,10 +113,6 @@ _deps/raylib-build/raylib/libraylib.a:
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o:
-
-/usr/lib32/libGLdispatch.so.0:
-
-/usr/lib/libGLdispatch.so.0:
 
 /usr/lib32/libX11.so.6:
 
