@@ -63,11 +63,11 @@ CMAKE_BINARY_DIR = /home/dtonmai/JankyJunk/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/tetris.dir/all
+all: CMakeFiles/JankyJunk.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/tetris.dir/codegen
+codegen: CMakeFiles/JankyJunk.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,40 +75,40 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/tetris.dir/clean
+clean: CMakeFiles/JankyJunk.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/tetris.dir
+# Target rules for target CMakeFiles/JankyJunk.dir
 
 # All Build rule for target.
-CMakeFiles/tetris.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dtonmai/JankyJunk/build/CMakeFiles --progress-num=1,2 "Built target tetris"
-.PHONY : CMakeFiles/tetris.dir/all
+CMakeFiles/JankyJunk.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dtonmai/JankyJunk/build/CMakeFiles --progress-num=1,2 "Built target JankyJunk"
+.PHONY : CMakeFiles/JankyJunk.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/tetris.dir/rule: cmake_check_build_system
+CMakeFiles/JankyJunk.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dtonmai/JankyJunk/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tetris.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/JankyJunk.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/dtonmai/JankyJunk/build/CMakeFiles 0
-.PHONY : CMakeFiles/tetris.dir/rule
+.PHONY : CMakeFiles/JankyJunk.dir/rule
 
 # Convenience name for target.
-tetris: CMakeFiles/tetris.dir/rule
-.PHONY : tetris
+JankyJunk: CMakeFiles/JankyJunk.dir/rule
+.PHONY : JankyJunk
 
 # codegen rule for target.
-CMakeFiles/tetris.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dtonmai/JankyJunk/build/CMakeFiles --progress-num=1,2 "Finished codegen for target tetris"
-.PHONY : CMakeFiles/tetris.dir/codegen
+CMakeFiles/JankyJunk.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/dtonmai/JankyJunk/build/CMakeFiles --progress-num=1,2 "Finished codegen for target JankyJunk"
+.PHONY : CMakeFiles/JankyJunk.dir/codegen
 
 # clean rule for target.
-CMakeFiles/tetris.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/clean
-.PHONY : CMakeFiles/tetris.dir/clean
+CMakeFiles/JankyJunk.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/clean
+.PHONY : CMakeFiles/JankyJunk.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

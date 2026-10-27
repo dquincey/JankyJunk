@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ostream>
 #include <raylib.h>
 #include <array>
 #include <iostream>
@@ -12,18 +14,38 @@ namespace Snake{
         body,
         food,
     };
-    struct grid_coords{
+    struct grid_vector{
         int x;
         int y;
         int z;
+
+        grid_vector operator+(const grid_vector& other) const{
+            return {other.x + x, other.y+y,other.z+z};
+        }
+        void operator+=(const grid_vector& other){
+            *this = {other.x + x, other.y+y,other.z+z};
+        }
+        grid_vector operator%(const int& divisor){
+            return {x % divisor, y % divisor, z % divisor};
+        }
     };
+    struct vec2{
+        int x;
+        int y;
+    };
+    namespace direction{
+        vec2 up = {0,1};
+        vec2 down = {0,-1};
+        vec2 left = {-1 ,0};
+        vec2 right = {1,0};
+    }
     const int GRID_Z = 5;
     const int GRID_X = 5;
     const int GRID_Y = 5;
 
     std::array<std::array<std::array<int,GRID_Z>,GRID_Y>,GRID_X>grid;
 
-    void set(grid_coords coords, block_type value){
+    void set(grid_vector coords, block_type value){
         //Checks whether it's within the array
         bool within = true;
         if (coords.x > GRID_X || coords.x < 0){
@@ -55,6 +77,49 @@ namespace Snake{
         }
     }
 }
+class head{
+    private:
+        Snake::grid_vector pos;
+        Snake::grid_vector facing;
+        Snake::grid_vector rotation;
+        std::array<int,4> axisrotation= {0,1,0,-1};
+    public:
+        head(const Snake::grid_vector& new_pos, const Snake::grid_vector& new_direction, const Snake::grid_vector& new_rotation) :pos(new_pos) , facing(new_direction), rotation(new_rotation)
+        {
+            std::cout << facing.x << facing.y << facing.z << std::endl;
+        }
+        head() :pos({0,0,0}) , facing({1,0,0}), rotation({0,0,0})
+        {}
+        void move(){
+            pos += facing;
+        }
+        void change_rotation(Snake::grid_vector rotation_change){
+            rotation += rotation_change;
+            rotation = ((rotation % 4) + Snake::grid_vector{4,4,4}) % 4;
+        }
+        void change_facing(Snake::vec2 direction_change){
+            std::cout << "direction change: " << direction_change.x << "," << direction_change.y <<std::endl;
+            if (std::abs(facing.x)== 1){
+                std::cout << "facing x!\n";
+                change_rotation({0, direction_change.x, direction_change.y});
+                facing = {0,axisrotation[rotation.y],axisrotation[rotation.z]};
+            }
+            else if (std::abs(facing.y)== 1){
+                std::cout << "facing y!\n";
+                change_rotation({direction_change.x, 0, direction_change.y});
+                facing = {axisrotation[rotation.x],0,axisrotation[rotation.z]};
+            }
+            else if (std::abs(facing.z)== 1){
+                std::cout << "facing z!\n";
+                change_rotation({direction_change.x, direction_change.y, 0});
+                facing = {axisrotation[rotation.x],axisrotation[rotation.y],0};
+            }
+        }
+        void print_facing(){
+            std::cout << "facing " << facing.x << facing.y << facing.z<<std::endl;
+            std::cout << "rotation " << rotation.x << rotation.y << rotation.z << std::endl;
+        }
+};
 int main(){
     InitWindow(1920, 1080, "HELLO");
     SetTargetFPS(60);
@@ -65,11 +130,8 @@ int main(){
    camera.fovy = 45.0f;
    camera.projection = CAMERA_PERSPECTIVE;
 
-   float x = 0.0f;
-   float y = 0.0f;
-   float z = 0.0f;
-
-   Snake::set({1,0,2}, Snake::body);
+   head h({0,0,0},{1,0,0},{0,0,0});
+   Snake::set({1,1,1}, Snake::body);
    while (!WindowShouldClose()) {
 
 
@@ -83,17 +145,21 @@ int main(){
 
        DrawGrid(10, SIZE);
 
-       if (IsKeyDown(KEY_W)){
-           x -= 0.1f;
+       if (IsKeyPressed(KEY_W)){
+           h.change_facing(Snake::direction::up);
+           h.print_facing();
        }
-       if (IsKeyDown(KEY_S)){
-           x += 0.1f;
+       if (IsKeyPressed(KEY_S)){
+           h.change_facing(Snake::direction::down);
+           h.print_facing();
        }
-       if (IsKeyDown(KEY_A)){
-           z += 0.1f;
+       if (IsKeyPressed(KEY_A)){
+           h.change_facing(Snake::direction::left);
+           h.print_facing();
        }
-       if (IsKeyDown(KEY_D)){
-           z -= 0.1f;
+       if (IsKeyPressed(KEY_D)){
+           h.change_facing(Snake::direction::right);
+           h.print_facing();
        }
        EndMode3D();
 

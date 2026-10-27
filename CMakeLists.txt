@@ -18,11 +18,11 @@ if (NOT raylib_FOUND)
     FetchContent_MakeAvailable(raylib)
 endif()
 
-add_executable(tetris
-    src/tetris.cpp
+add_executable(JankyJunk
+    src/main.cpp
 )
 #add_executable(${PROJECT_NAME}
 #    src/main.cpp
 #)
 
-target_link_libraries(tetris PRIVATE raylib)
+target_link_libraries(JankyJunk PRIVATE raylib)

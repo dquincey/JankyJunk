@@ -1,8 +1,8 @@
 [
 {
   "directory": "/home/dtonmai/JankyJunk/build",
-  "command": "/usr/sbin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -g -std=gnu++17 -o CMakeFiles/tetris.dir/src/tetris.cpp.o -c /home/dtonmai/JankyJunk/src/tetris.cpp",
-  "file": "/home/dtonmai/JankyJunk/src/tetris.cpp",
-  "output": "CMakeFiles/tetris.dir/src/tetris.cpp.o"
+  "command": "/usr/sbin/c++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED  -g -std=gnu++17 -o CMakeFiles/JankyJunk.dir/src/main.cpp.o -c /home/dtonmai/JankyJunk/src/main.cpp",
+  "file": "/home/dtonmai/JankyJunk/src/main.cpp",
+  "output": "CMakeFiles/JankyJunk.dir/src/main.cpp.o"
 }
 ]

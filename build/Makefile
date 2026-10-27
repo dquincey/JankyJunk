@@ -117,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named tetris
+# Target rules for targets named JankyJunk
 
 # Build rule for target.
-tetris: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tetris
-.PHONY : tetris
+JankyJunk: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 JankyJunk
+.PHONY : JankyJunk
 
 # fast build rule for target.
-tetris/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/build
-.PHONY : tetris/fast
+JankyJunk/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/build
+.PHONY : JankyJunk/fast
 
-src/tetris.o: src/tetris.cpp.o
-.PHONY : src/tetris.o
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
 
 # target to build an object file
-src/tetris.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/tetris.cpp.o
-.PHONY : src/tetris.cpp.o
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-src/tetris.i: src/tetris.cpp.i
-.PHONY : src/tetris.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-src/tetris.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/tetris.cpp.i
-.PHONY : src/tetris.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-src/tetris.s: src/tetris.cpp.s
-.PHONY : src/tetris.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-src/tetris.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tetris.dir/build.make CMakeFiles/tetris.dir/src/tetris.cpp.s
-.PHONY : src/tetris.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/JankyJunk.dir/build.make CMakeFiles/JankyJunk.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -161,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... tetris"
-	@echo "... src/tetris.o"
-	@echo "... src/tetris.i"
-	@echo "... src/tetris.s"
+	@echo "... JankyJunk"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 
