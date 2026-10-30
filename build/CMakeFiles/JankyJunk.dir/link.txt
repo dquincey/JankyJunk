@@ -1,1 +1,0 @@
-/usr/sbin/c++ -O3 -DNDEBUG -static-libstdc++ -static-libgcc -Wl,--dependency-file=CMakeFiles/JankyJunk.dir/link.d CMakeFiles/JankyJunk.dir/src/main.cpp.o -o JankyJunk  _deps/raylib-build/raylib/libraylib.a -lm -lpthread /usr/lib/libOpenGL.so /usr/lib/libGLX.so /usr/lib/libGLU.so /usr/lib/librt.a -lm -ldl
