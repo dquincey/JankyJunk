@@ -324,6 +324,7 @@ int main() {
 
   std::cout << "Score: " << score << std::endl;
   CloseWindow();
+  
 
   return 0;
 }
