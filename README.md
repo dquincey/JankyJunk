@@ -21,3 +21,15 @@ I made this mostly as a way to get more familiar with Raylib and C++. But it was
 ### Installation
 It **only works on Linux**, unfortunately, but if you do run on Linux, go to the releases page on the right and follow the instructions there.
 
+## 3D snake
+
+This is my attempt at making 3D snake. I've spent most of my time being confused, at 3D and how I'm going to do the turning system. So this is currently
+a work in progress and there is no actual game loop. Just a square in the middle of a black void. But, the camera can orbit, and from here I hope it will
+be easier to create the systems as what I've done so far is create tools and functions to make the harder parts hopefully easier.
+
+I was originally going to make this just regular 2D snake, but I saw the thumbnail of a youtube video with snake but 3D, and was immediately inspired.
+This is my exercise to learn more about 3D, and also that it's just a cool idea. 
+
+### If you wanna try it for some reason
+Go to the releases -> Snake and follow the instructions there.
+
