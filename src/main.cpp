@@ -18,22 +18,22 @@ enum block_type {
   body,
   food,
 };
-struct grid_vector {
+struct int_vector {
   int x;
   int y;
   int z;
 
-  grid_vector operator+(const grid_vector &other) const {
+  int_vector operator+(const int_vector &other) const {
     return {other.x + x, other.y + y, other.z + z};
   }
-  void operator+=(const grid_vector &other) {
+  void operator+=(const int_vector &other) {
     *this = {other.x + x, other.y + y, other.z + z};
   }
-  grid_vector operator%(const int &divisor) {
+  int_vector operator%(const int &divisor) {
     return {x % divisor, y % divisor, z % divisor};
   }
   friend std::ostream &operator<<(std::ostream &stream,
-                                  const grid_vector &other) {
+                                  const int_vector &other) {
     return stream << other.x << ", " << other.y << "," << other.z << std::endl;
   }
 };
@@ -53,7 +53,7 @@ const int GRID_Y = 5;
 
 std::array<std::array<std::array<int, GRID_Z>, GRID_Y>, GRID_X> grid;
 
-void set(grid_vector coords, block_type value) {
+void set(int_vector coords, block_type value) {
   // Checks whether it's within the array
   bool within = true;
   if (coords.x > GRID_X || coords.x < 0) {
@@ -96,8 +96,8 @@ void clear_body() {
     }
   }
 }
-grid_vector camera_facing(float pitch, float yaw){
-  grid_vector return_vector= {0,0,0};
+int_vector camera_facing(float pitch, float yaw) {
+  int_vector return_vector = {0, 0, 0};
   if (pitch * RAD2DEG > 45.0f) {
     return_vector.y = 1;
   } else if (pitch * RAD2DEG < -45.0f) {
@@ -119,30 +119,36 @@ grid_vector camera_facing(float pitch, float yaw){
   }
   return return_vector;
 }
+Vector3 camera_pos_relative(Vector3 cam_pos, Snake::int_vector relative_to) {
+  Vector3 relative_position_real = {relative_to.x * SIZE, relative_to.y * SIZE,
+                                    relative_to.z * SIZE};
+  return {cam_pos.x - relative_position_real.x,
+          cam_pos.y - relative_position_real.y,
+          cam_pos.z - relative_position_real.z};
+}
 } // namespace Snake
 
 class head {
 private:
-  Snake::grid_vector pos;
-  Snake::grid_vector facing;
-  Snake::grid_vector rotation;
-  Snake::grid_vector facing_amount;
-  Snake::grid_vector default_facing;
-  std::string axisfacing = "x";
+  Snake::int_vector pos;
+  Snake::int_vector facing;
+  Snake::int_vector rotation;
+  Snake::int_vector facing_amount;
+  Snake::int_vector default_facing;
+  Snake::int_vector relative_rotation;
 
-  void facing_change(Snake::grid_vector rotation_change) {
+  void facing_change(Snake::int_vector rotation_change) {
     std::array<int, 4> positives{0, 1, 0, -1};
     std::cout << "rotation_change " << rotation_change.x << rotation_change.y
               << rotation_change.z << std::endl;
     facing_amount += rotation_change;
-    facing_amount = ((facing_amount % 4) + Snake::grid_vector{4, 4, 4}) % 4;
+    facing_amount = ((facing_amount % 4) + Snake::int_vector{4, 4, 4}) % 4;
     facing = {positives[facing_amount.x], positives[facing_amount.y],
               positives[facing_amount.z]};
   }
 
 public:
-  head(const Snake::grid_vector &new_pos,
-       const Snake::grid_vector &new_direction)
+  head(const Snake::int_vector &new_pos, const Snake::int_vector &new_direction)
       : pos(new_pos), facing(new_direction), default_facing(new_direction),
         rotation({0, 0, 0}) {
     facing_amount = {1, 0, 0};
@@ -206,8 +212,6 @@ public:
 };
 int main() {
 
-  std::string camera_facing_direction_pitch;
-  std::string camera_facing_direction_yaw;
   float pitch = 45.0f * DEG2RAD;
   float yaw = 45.0f * DEG2RAD;
   float distance = 70.0f;
