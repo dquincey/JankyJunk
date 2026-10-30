@@ -1,1 +1,0 @@
-/usr/sbin/c++ -g -Wl,--dependency-file=CMakeFiles/tetris.dir/link.d CMakeFiles/tetris.dir/src/tetris.cpp.o -o tetris  /usr/lib/libraylib.so.6.2.0 -lm
