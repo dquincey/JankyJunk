@@ -328,53 +328,41 @@ class head {
         if (camera_facing.y == 0) {
             if (camera_facing.x == 1) {
                 trial_turn(camera_facing, {0, where.x * -1, where.y});
-                // std::cout << "0y+x\n";
             }
             if (camera_facing.z == 1) {
                 trial_turn(camera_facing, {where.y, where.x * -1, 0});
-                // std::cout << "0y+z\n";
             }
             if (camera_facing.x == -1) {
                 trial_turn(camera_facing, {0, where.x * -1, where.y * -1});
-                // std::cout << "0y-x\n";
             }
             if (camera_facing.z == -1) {
                 trial_turn(camera_facing, {where.y * -1, where.x * -1, 0});
-                // std::cout << "0y-z\n";
             }
         } else if (camera_facing.y == 1) {
             if (camera_facing.x == 1) {
                 trial_turn(camera_facing, {where.x * -1, 0, where.y});
-                // std::cout << "+y+x\n";
             }
             if (camera_facing.z == 1) {
                 trial_turn(camera_facing, {where.y, 0, where.x});
-                // std::cout << "+y+z\n";
             }
             if (camera_facing.x == -1) {
                 trial_turn(camera_facing, {where.x, 0, where.y * -1});
-                // std::cout << "+y-x\n";
-            }
-            if (camera_facing.z == -1) {
-                trial_turn(camera_facing, {where.y * -1, 0, where.x});
-                // std::cout << "+y-z\n";
-            }
-        } else if (camera_facing.y == -1) {
-            if (camera_facing.x == 1) {
-                trial_turn(camera_facing, {where.x * -1, 0, where.y});
-                // std::cout << "-y+x\n";
-            }
-            if (camera_facing.z == 1) {
-                trial_turn(camera_facing, {where.y, 0, where.x});
-                // std::cout << "-y+z\n";
-            }
-            if (camera_facing.x == -1) {
-                trial_turn(camera_facing, {where.x, 0, where.y * -1});
-                // std::cout << "-y-x\n";
             }
             if (camera_facing.z == -1) {
                 trial_turn(camera_facing, {where.y * -1, 0, where.x * -1});
-                // std::cout << "-y-z\n";
+            }
+        } else if (camera_facing.y == -1) {
+            if (camera_facing.x == 1) {
+                trial_turn(camera_facing, {where.x, 0, where.y});
+            }
+            if (camera_facing.z == 1) {
+                trial_turn(camera_facing, {where.y, 0, where.x * -1});
+            }
+            if (camera_facing.x == -1) {
+                trial_turn(camera_facing, {where.x * -1, 0, where.y * -1});
+            }
+            if (camera_facing.z == -1) {
+                trial_turn(camera_facing, {where.y * -1, 0, where.x});
             }
         }
     }

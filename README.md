@@ -23,14 +23,24 @@ It **only works on Linux**, unfortunately, but if you do run on Linux, go to the
 
 ## 3D snake
 
-This is my attempt at making 3D snake. I've spent most of my time being confused, at 3D and how I'm going to do the turning system. So this is currently
-a work in progress and there is no actual game loop. Just a square in the middle of a black void. But, the camera can orbit, and from here I hope it will
-be easier to create the systems as what I've done so far is create tools and functions to make the harder parts hopefully easier.
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9f8061c1-e8be-464c-a982-cb2d54f84ef5" />
+This is snake, but in 3D. It has the actual snake body, random fruit generation, a score, dying, a bit of an input buffer, and a camera that smoothly follows the head of the snake.
+
+The _turning system_ was a bit of a challenge, it had to take in many variables and was a bit hard to implement. In 2D snake, you have the possible 
+controls of the snake alternating between **left and right** and **up and down**, but in 3D, you are able to use all of the directions at once, and where you 
+want it to point varies significantly based on the **camera** and the **current facing direction** and the **input** given.
 
 I was originally going to make this just regular 2D snake, but I saw the thumbnail of a youtube video with snake but 3D, and was immediately inspired.
 This is my exercise to learn more about 3D, and also that it's just a cool idea. 
-
-### If you wanna try it for some reason
+### Controls 
+ - Esc -> exit 
+ - Mouse -> Orbit snake head.
+ - Scroll wheel -> Zoom in and out.
+ - WASD/Arrow keys -> Left, Right, Up, Down based on the camera angle.
+#### Gameplay Tips 
+ - It works based on the camera angle, so try to *always point the camera at a 90 degree angle* to the snake head.
+ - Try to imagine yourself as the snake head, this will make understanding where you are actually going to turn easier.
+ - If you try to turn towards the current axis that the snake is facing, it will push it to the next axis. With this, you can **press *up* twice** in order
+ to move up a layer, and vise-versa with down. 
+### Installation
 Go to the releases -> Snake and follow the instructions there.
 
