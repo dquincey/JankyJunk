@@ -29,6 +29,8 @@ The _turning system_ was a bit of a challenge, it had to take in many variables 
 controls of the snake alternating between **left and right** and **up and down**, but in 3D, you are able to use all of the directions at once, and where you 
 want it to point varies significantly based on the **camera** and the **current facing direction** and the **input** given.
 
+<img width="1915" height="1076" alt="image" src="https://github.com/user-attachments/assets/292ddf09-d24d-4ae8-98ce-72015be1cd29" />
+
 I was originally going to make this just regular 2D snake, but I saw the thumbnail of a youtube video with snake but 3D, and was immediately inspired.
 This is my exercise to learn more about 3D, and also that it's just a cool idea. 
 ### Controls 
@@ -39,8 +41,9 @@ This is my exercise to learn more about 3D, and also that it's just a cool idea.
 #### Gameplay Tips 
  - It works based on the camera angle, so try to *always point the camera at a 90 degree angle* to the snake head.
  - Try to imagine yourself as the snake head, this will make understanding where you are actually going to turn easier.
- - If you try to turn towards the current axis that the snake is facing, it will push it to the next axis. With this, you can **press *up* twice** in order
- to move up a layer, and vise-versa with down. 
+ - If you try to turn towards the current axis that the snake is facing, it will push it to the next axis. With this, you can **press *up* twice** in order to move up or down a layer, depending on the camera angle a layer, and vise-versa with down.
+ - Part of the challenge is using the camera. It's essential to the game, so use the mouse.
+ - Try to do axis one at a time, so move the mouse, get it at the same level as the fruit and repeat.
 ### Installation
 Go to the releases -> Snake and follow the instructions there.
 
