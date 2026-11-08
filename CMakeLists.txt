@@ -16,6 +16,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(raylib)
 
-add_executable(JankyJunk src/main.cpp)
-target_link_libraries(JankyJunk PRIVATE raylib)
-target_link_options(JankyJunk PRIVATE -static-libstdc++ -static-libgcc)
+add_executable(snake
+    src/snake.cpp
+)
+#add_executable(${PROJECT_NAME}
+#    src/main.cpp
+#)
+
+target_link_libraries(snake PRIVATE raylib)
